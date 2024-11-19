@@ -2,6 +2,7 @@ import com.codeborne.xlstest.XLS;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.CSVReader;
 import model.Client;
+import model.Uslugi;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,7 +20,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SelenideFilesTest {
 
@@ -97,10 +98,7 @@ public class SelenideFilesTest {
                 "    \"services\": {\n" +
                 "      \"serviceExtId\": \"464352763\",\n" +
                 "      \"serviceId\": \"234523\",\n" +
-                "      \"main\": true,\n" +
-                "      \"serviceName\": \"Internet\",\n" +
-                "      \"dateStart\": \"2020-01-01T00:00:00+07:00\",\n" +
-                "      \"dateEnd\": \"2074-01-01T00:00:00+07:00\"\n" +
+                "      \"main\": true\n" +
                 "    }\n" +
                 "  },\n" +
                 "  {\n" +
@@ -111,10 +109,7 @@ public class SelenideFilesTest {
                 "    \"services\": {\n" +
                 "      \"serviceExtId\": \"45876654\",\n" +
                 "      \"serviceId\": \"432323523\",\n" +
-                "      \"main\": false,\n" +
-                "      \"serviceName\": \"Phone\",\n" +
-                "      \"dateStart\": \"2010-01-01T00:00:00+07:00\",\n" +
-                "      \"dateEnd\": \"2074-01-01T00:00:00+07:00\"\n" +
+                "      \"main\": false\n" +
                 "    }\n" +
                 "  }\n" +
                 "]";
@@ -130,8 +125,10 @@ public class SelenideFilesTest {
         assertEquals("6235423455345", firstPerson.getExtId(), "First person extId should be '6235423455345'");
         assertEquals("19.07.1995", firstPerson.getBirthDate(), "First person birth date should be '19.07.1995'");
 
-        assertThat(firstPerson.getServices().getServiceName()).isEqualTo("Internet");
-        assertThat(firstPerson.getServices().getDateStart()).isEqualTo("2020-01-01T00:00:00+07:00");
+        Uslugi firstPersonService = firstPerson.getServices();
+        assertEquals("464352763", firstPersonService.getServiceExtId(), "First person serviceExtId should be '464352763'");
+        assertEquals("234523", firstPersonService.getServiceId(), "First person serviceId should be '234523'");
+        assertTrue(firstPersonService.isMain(), "First person service should be main");
 
         Client secondPerson = people.get(1);
         assertEquals("Peter", secondPerson.getName(), "Second person name should be 'Peter'");
@@ -139,7 +136,9 @@ public class SelenideFilesTest {
         assertEquals("9568234235", secondPerson.getExtId(), "Second person extId should be '9568234235'");
         assertEquals("11.03.1999", secondPerson.getBirthDate(), "Second person birth date should be '11.03.1999'");
 
-        assertThat(secondPerson.getServices().getServiceName()).isEqualTo("Phone");
-        assertThat(secondPerson.getServices().getDateStart()).isEqualTo("2010-01-01T00:00:00+07:00");
+        Uslugi secondPersonService = secondPerson.getServices();
+        assertEquals("45876654", secondPersonService.getServiceExtId(), "Second person serviceExtId should be '45876654'");
+        assertEquals("432323523", secondPersonService.getServiceId(), "Second person serviceId should be '432323523'");
+        assertFalse(secondPersonService.isMain(), "Second person service should not be main");
     }
 }

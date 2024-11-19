@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Ivan",
+    "secondName": "Ivanov",
+    "extId": "6235423455345",
+    "birthDate": "19.07.1995",
+    "services": {
+      "serviceExtId": "464352763",
+      "serviceId": "234523",
+      "main": true
+    }
+  },
+  {
+    "name": "Peter",
+    "secondName": "Petrov",
+    "extId": "9568234235",
+    "birthDate": "11.03.1999",
+    "services": {
+      "serviceExtId": "45876654",
+      "serviceId": "432323523",
+      "main": false
+    }
+  }
+]

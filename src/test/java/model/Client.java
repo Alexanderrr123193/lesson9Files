@@ -1,15 +1,13 @@
-package model;// Person.java
-
-import com.google.common.util.concurrent.Service;
+package model;
 
 public class Client {
     private String name;
     private String secondName;
     private String extId;
     private String birthDate;
-    private Service services;
+    private Uslugi services;
 
-
+    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -42,11 +40,11 @@ public class Client {
         this.birthDate = birthDate;
     }
 
-    public Service getServices() {
+    public Uslugi getServices() {
         return services;
     }
 
-    public void setServices(Service services) {
+    public void setServices(Uslugi services) {
         this.services = services;
     }
 }
